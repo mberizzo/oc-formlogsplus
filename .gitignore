@@ -1,0 +1,7 @@
+/*
+!.gitignore
+
+# plugins
+!/plugins
+/plugins/*
+!/plugins/mberizzo
