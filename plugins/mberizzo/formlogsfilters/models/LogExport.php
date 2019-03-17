@@ -12,7 +12,9 @@ class LogExport extends \Backend\Models\ExportModel
             $select[] = $this->prepareColumnToSelect($col);
         }
 
-        $logs = Log::select($select)->orderBy('id', 'desc')->get();
+        $logs = Log::select($select)
+            ->where('form_id', request()->form_id)
+            ->get();
 
         return $logs->toArray();
     }

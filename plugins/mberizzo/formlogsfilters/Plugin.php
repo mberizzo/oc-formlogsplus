@@ -2,6 +2,8 @@
 
 use Backend;
 use Illuminate\Support\Facades\Event;
+use Mberizzo\FormLogsFilters\Models\Settings;
+use Renatio\FormBuilder\Models\Form as RenatioForm;
 use Renatio\FormBuilder\Models\FormLog;
 use System\Classes\PluginBase;
 
@@ -10,6 +12,12 @@ use System\Classes\PluginBase;
  */
 class Plugin extends PluginBase
 {
+
+    /**
+     * @var array Plugin dependencies
+     */
+    public $require = ['Renatio.FormBuilder'];
+
     /**
      * Returns information about this plugin.
      *
@@ -32,15 +40,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        Event::listen('backend.menu.extendItems', function($manager) {
-            $manager->addSideMenuItems('Renatio.FormBuilder', 'formbuilder', [
-                'logs' => [
-                    'label' => 'Curriculums',
-                    'icon' => 'icon-graduation-cap',
-                    'url' => Backend::url('mberizzo/formlogsfilters/logs/index'),
-                ]
-            ]);
-        });
+
     }
 
     public function registerListColumnTypes()
@@ -85,16 +85,65 @@ class Plugin extends PluginBase
      */
     public function registerNavigation()
     {
-        return []; // Remove this line to activate
+        $menu = $this->getMainMenuNavigation();
 
+        // Build sidebar navigation
+        RenatioForm::all()->each(function ($item, $key) use (&$menu) {
+            $menu['formlogsfilters']['sideMenu'][$item->id] = [
+                'label' => $item->name,
+                'icon' => 'icon-envelope',
+                'url' => Backend::url("mberizzo/formlogsfilters/logs/index/{$item->id}"),
+            ];
+        });
+
+        return $menu;
+    }
+
+    private function getMainMenuNavigation()
+    {
         return [
             'formlogsfilters' => [
-                'label'       => 'FormLogsFilters',
-                'url'         => Backend::url('mberizzo/formlogsfilters/mycontroller'),
-                'icon'        => 'icon-leaf',
+                'label'       => 'Messages',
+                'url'         => Backend::url('mberizzo/formlogsfilters/logs'),
+                'icon'        => 'icon-envelope',
                 'permissions' => ['mberizzo.formlogsfilters.*'],
                 'order'       => 500,
             ],
         ];
+    }
+
+    public function registerSettings()
+    {
+        // Add fields dynamically
+        Event::listen('backend.form.extendFields', function ($form) {
+            if (! $form->model instanceof Settings) {
+                return;
+            }
+
+            RenatioForm::all()->each(function ($item) use ($form) {
+                $data = [];
+                $item->fields->each(function($field, $key) use ($item, &$data) {
+                    // We can config just the type="text" fields
+                    $allowedTypeFields = ['text', 'email'];
+                    if (in_array($field->field_type->code, $allowedTypeFields)) {
+                        $data["{$item->id}_{$field->name}"] = [ // key: form_id + field_name
+                            'label' => $field->label,
+                            'tab' => $item->name,
+                            'usePanelStyles' => false,
+                            'type' => 'checkboxlist',
+                            'span' => 'auto',
+                            'options' => [
+                                'is_column' => 'Add to columns',
+                                'is_filter' => 'Add to filters',
+                            ],
+                        ];
+                    }
+                });
+
+                $form->addTabFields($data);
+            });
+        });
+
+        return Settings::$config;
     }
 }

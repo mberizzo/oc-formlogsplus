@@ -1,5 +1,4 @@
 <?= Form::open(['class' => 'layout']) ?>
-
     <div class="layout-row">
         <?= $this->exportRender() ?>
     </div>
@@ -14,5 +13,7 @@
             Exportar
         </button>
     </div>
+
+    <input type="hidden" name="form_id" value="<?= $formId ?>">
 
 <?= Form::close() ?>

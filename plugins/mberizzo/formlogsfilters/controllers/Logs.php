@@ -2,6 +2,8 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use Renatio\FormBuilder\Models\Form;
+use System\Classes\SettingsManager;
 
 /**
  * Logs Back-end Controller
@@ -24,20 +26,37 @@ class Logs extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Renatio.FormBuilder', 'formlogs');
+        BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters');
+        SettingsManager::setContext('Mberizzo.FormLogsFilters', 'settings');
     }
 
-    public function index($formId)
+    public function index($formId = null)
     {
+        $formId = $formId ?? $this->getFirstFormId();
+
         // Store the routed parameter to use later
         $this->formId = $formId;
-
         $this->asExtension('ListController')->index();
+
+        // Export formId
+        $this->vars['formId'] = $formId;
     }
 
     public function listExtendQuery($query)
     {
        // Extend the list query to filter by the form id
         $query->where('form_id', $this->formId);
+    }
+
+    public function export($formId)
+    {
+        $this->vars['formId'] = $formId;
+        parent::export();
+    }
+
+    private function getFirstFormId()
+    {
+        return 3; // @TODO: remove hardcoded
+        return Form::orderBy('name')->first()->id ?? null;
     }
 }
