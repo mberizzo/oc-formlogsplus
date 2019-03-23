@@ -2,32 +2,36 @@
 # Filter Scope Definitions
 # ===================================
 
-scopes:
+# scopes:
+#     id:
+#         label: ID
+#         type: number
+#         conditions: id = ':filtered'
 
-    form_data.field_nombre.value:
-        label: Nombre
-        type: text
-        conditions: LOWER(JSON_EXTRACT(form_data, '$.field_nombre.value')) LIKE LOWER("%":value"%")
+#     form_data.field_nombre.value:
+#         label: Nombre
+#         type: text
+#         conditions: LOWER(JSON_EXTRACT(form_data, "$.field_nombre.value")) LIKE LOWER("%":value"%")
 
-    form_data.field_apellido.value:
-        label: Apellido
-        type: text
-        conditions: LOWER(JSON_EXTRACT(form_data, '$.field_apellido.value')) LIKE LOWER("%":value"%")
+#     form_data.field_apellido.value:
+#         label: Apellido
+#         type: text
+#         conditions: LOWER(JSON_EXTRACT(form_data, '$.field_apellido.value')) LIKE LOWER("%":value"%")
 
-    form_data.field_email.value:
-        label: Email
-        type: text
-        conditions: LOWER(JSON_EXTRACT(form_data, '$.field_email.value')) LIKE LOWER("%":value"%")
+#     form_data.field_email.value:
+#         label: Email
+#         type: text
+#         conditions: LOWER(JSON_EXTRACT(form_data, '$.field_email.value')) LIKE LOWER("%":value"%")
 
-    form_data.field_sexo.value:
-        label: Sexo
-        type: group
-        conditions: JSON_EXTRACT(form_data, '$.field_sexo.value') = :filtered
-        options:
-            Masculino: Masculino
-            Femenino: Femenino
+#     form_data.field_sexo.value:
+#         label: Sexo
+#         type: group
+#         conditions: JSON_EXTRACT(form_data, '$.field_sexo.value') = :filtered
+#         options:
+#             Masculino: Masculino
+#             Femenino: Femenino
 
-    created_at:
-        label: Date
-        type: daterange
-        conditions: created_at >= ':after' AND created_at <= ':before'
+#     created_at:
+#         label: Date
+#         type: daterange
+#         conditions: created_at >= ':after' AND created_at <= ':before'

@@ -2,6 +2,8 @@
 
 use Backend;
 use Illuminate\Support\Facades\Event;
+use Mberizzo\FormLogsFilters\Controllers\Logs;
+use Mberizzo\FormLogsFilters\Models\Log;
 use Mberizzo\FormLogsFilters\Models\Settings;
 use Renatio\FormBuilder\Models\Form as RenatioForm;
 use Renatio\FormBuilder\Models\FormLog;
@@ -87,8 +89,14 @@ class Plugin extends PluginBase
     {
         $menu = $this->getMainMenuNavigation();
 
+        // @TODO: move this as Setting attribute
+        $formsIds = filter_var_array(
+            array_keys(Settings::instance()->value),
+            FILTER_SANITIZE_NUMBER_INT
+        );
+
         // Build sidebar navigation
-        RenatioForm::all()->each(function ($item, $key) use (&$menu) {
+        RenatioForm::findMany($formsIds)->each(function ($item, $key) use (&$menu) {
             $menu['formlogsfilters']['sideMenu'][$item->id] = [
                 'label' => $item->name,
                 'icon' => 'icon-envelope',
@@ -114,34 +122,12 @@ class Plugin extends PluginBase
 
     public function registerSettings()
     {
-        // Add fields dynamically
         Event::listen('backend.form.extendFields', function ($form) {
             if (! $form->model instanceof Settings) {
                 return;
             }
 
-            RenatioForm::all()->each(function ($item) use ($form) {
-                $data = [];
-                $item->fields->each(function($field, $key) use ($item, &$data) {
-                    // We can config just the type="text" fields
-                    $allowedTypeFields = ['text', 'email'];
-                    if (in_array($field->field_type->code, $allowedTypeFields)) {
-                        $data["{$item->id}_{$field->name}"] = [ // key: form_id + field_name
-                            'label' => $field->label,
-                            'tab' => $item->name,
-                            'usePanelStyles' => false,
-                            'type' => 'checkboxlist',
-                            'span' => 'auto',
-                            'options' => [
-                                'is_column' => 'Add to columns',
-                                'is_filter' => 'Add to filters',
-                            ],
-                        ];
-                    }
-                });
-
-                $form->addTabFields($data);
-            });
+            Settings::buildFieldsDotYaml($form);
         });
 
         return Settings::$config;

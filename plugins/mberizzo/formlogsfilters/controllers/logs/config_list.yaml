@@ -12,7 +12,7 @@ modelClass: Mberizzo\FormLogsFilters\Models\Log
 title: Manage Logs
 
 # Link URL for each record
-recordUrl: mberizzo/formlogsfilters/logs/update/:id
+recordUrl: renatio/formbuilder/formlogs/preview/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records
@@ -24,7 +24,7 @@ recordsPerPage: 20
 showPageNumbers: true
 
 # Displays the list column set up button
-showSetup: true
+showSetup: false
 
 # Displays the sorting link on each column
 showSorting: true
@@ -35,7 +35,7 @@ defaultSort:
     direction: desc
 
 # Display checkboxes next to each record
-showCheckboxes: true
+showCheckboxes: false
 
 # Toolbar widget configuration
 toolbar:
