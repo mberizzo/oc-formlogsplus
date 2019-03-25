@@ -2,10 +2,8 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use Illuminate\Support\Arr;
+use Mberizzo\FormLogsFilters\Classes\FilterExtender;
 use Mberizzo\FormLogsFilters\Classes\ListExtender;
-use Mberizzo\FormLogsFilters\Models\Settings;
-use Renatio\FormBuilder\Models\Field;
 use Renatio\FormBuilder\Models\Form;
 use System\Classes\SettingsManager;
 
@@ -14,6 +12,7 @@ use System\Classes\SettingsManager;
  */
 class Logs extends Controller
 {
+
     public $implement = [
         'Backend.Behaviors.FormController',
         'Backend.Behaviors.ListController',
@@ -25,7 +24,6 @@ class Logs extends Controller
     public $importExportConfig = 'config_import_export.yaml';
 
     public $formId;
-    protected $settings;
 
     public function __construct()
     {
@@ -45,9 +43,6 @@ class Logs extends Controller
 
         // Export formId
         $this->vars['formId'] = $formId;
-
-        // Used to know which columns and filters to show
-        $this->settings = Settings::get("form_id_$formId");
     }
 
     public function listExtendQuery($query)
@@ -72,51 +67,8 @@ class Logs extends Controller
         (new ListExtender($list))->addColumns();
     }
 
-    public function listFilterExtendScopes($filter)
+    public function listFilterExtendScopes($filter): void
     {
-        $this->getScopes()->each(function ($col) use ($filter) {
-            $field = $this->getField($col);
-            $type = 'text';
-            $conditions = 'LOWER(JSON_EXTRACT(form_data, "$.' . $col . '.value")) LIKE LOWER("%":value"%")';
-            $options = [];
-
-            if ($field->field_type->code == 'radio_list') {
-                $type = 'group';
-                $conditions = "JSON_EXTRACT(form_data, '$.field_sexo.value') in (:filtered)";
-                $options = array_map(function ($option) {
-                    return [$option['o_key'] => $option['o_label']];
-                }, $field->options);
-            }
-
-            $filter->addScopes([
-                "form_data.{$col}.value" => [
-                    'label' => $field->label,
-                    'type' => $type,
-                    'conditions' => $conditions,
-                    'options' => Arr::collapse($options),
-                ],
-            ]);
-        });
-
-        $filter->addScopes([
-            "created_at" => [
-                'label' => 'Date',
-                'type' => "daterange",
-                'conditions' => "created_at >= ':after' AND created_at <= ':before'",
-            ],
-        ]);
-    }
-
-    private function getField($col)
-    {
-        return Field::where([
-            'name' => $col,
-            'form_id' => $this->formId
-        ])->first();
-    }
-
-    private function getScopes()
-    {
-        return collect($this->settings['scopes'] ?? []);
+        (new FilterExtender($filter))->addScopes();
     }
 }

@@ -1,27 +1,28 @@
 <?php namespace Mberizzo\FormLogsFilters\Classes;
 
-use Mberizzo\FormLogsFilters\Models\Settings;
+use Mberizzo\FormLogsFilters\Traits\FormSettings;
 use Renatio\FormBuilder\Models\Field;
 
 class ListExtender
 {
 
+    use FormSettings;
+
     protected $list;
-    protected $controller;
-    protected $columns = [];
+    protected $formId;
 
     public function __construct($list)
     {
         $this->list = $list;
-        $this->controller = $list->getController();
-        $this->columns = $this->getColumns();
+        $this->formId = $list->getController()->formId;
     }
 
     public function addColumns()
     {
-        foreach ($this->columns as $col) {
-            $field = $this->getField($col); // @TODO: avoid find() every time
-            $this->list->addColumns($this->makeColumn($field));
+        foreach ($this->columns() as $fieldName) {
+            $this->list->addColumns(
+                $this->makeColumn($this->fields()[$fieldName])
+            );
         }
 
         $this->addCreatedAtColumn();
@@ -48,19 +49,5 @@ class ListExtender
                 'sortable' => true,
             ],
         ]);
-    }
-
-    protected function getColumns()
-    {
-        $config = Settings::get("form_id_{$this->controller->formId}");
-        return $config['columns'] ?? [];
-    }
-
-    protected function getField($col)
-    {
-        return Field::where([
-            'name' => $col,
-            'form_id' => $this->controller->formId,
-        ])->first();
     }
 }
