@@ -3,6 +3,7 @@
 use BackendMenu;
 use Backend\Classes\Controller;
 use Illuminate\Support\Arr;
+use Mberizzo\FormLogsFilters\Classes\ListExtender;
 use Mberizzo\FormLogsFilters\Models\Settings;
 use Renatio\FormBuilder\Models\Field;
 use Renatio\FormBuilder\Models\Form;
@@ -23,7 +24,7 @@ class Logs extends Controller
     public $listConfig = 'config_list.yaml';
     public $importExportConfig = 'config_import_export.yaml';
 
-    protected $formId;
+    public $formId;
     protected $settings;
 
     public function __construct()
@@ -66,27 +67,9 @@ class Logs extends Controller
         return Form::orderBy('name')->first()->id ?? abort(404);
     }
 
-    public function listExtendColumns($list)
+    public function listExtendColumns($list): void
     {
-        $this->getColumns()->each(function ($col) use ($list) {
-            $field = $this->getField($col);
-            $list->addColumns([
-                "form_data.{$col}.value" => [
-                    'label' => $field->label,
-                    'type' => 'mberizzo.json',
-                    'sortable' => false,
-                    'invisible' => false,
-                ],
-            ]);
-        });
-
-        $list->addColumns([
-            "created_at" => [
-                'label' => 'Date',
-                'type' => 'date',
-                'sortable' => true,
-            ],
-        ]);
+        (new ListExtender($list))->addColumns();
     }
 
     public function listFilterExtendScopes($filter)
@@ -130,11 +113,6 @@ class Logs extends Controller
             'name' => $col,
             'form_id' => $this->formId
         ])->first();
-    }
-
-    private function getColumns()
-    {
-        return collect($this->settings['columns'] ?? []);
     }
 
     private function getScopes()
