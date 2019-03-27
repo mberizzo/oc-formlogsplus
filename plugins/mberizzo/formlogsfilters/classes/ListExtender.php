@@ -1,7 +1,6 @@
 <?php namespace Mberizzo\FormLogsFilters\Classes;
 
 use Mberizzo\FormLogsFilters\Traits\FormSettings;
-use Renatio\FormBuilder\Models\Field;
 
 class ListExtender
 {

@@ -2,9 +2,9 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
+use Mberizzo\FormLogsFilters\Classes\ExportHelper;
 use Mberizzo\FormLogsFilters\Classes\FilterExtender;
 use Mberizzo\FormLogsFilters\Classes\ListExtender;
-use Renatio\FormBuilder\Models\Form;
 use System\Classes\SettingsManager;
 
 /**
@@ -35,10 +35,12 @@ class Logs extends Controller
 
     public function index($formId = null)
     {
-        $formId = $formId ?? $this->getFirstFormId();
+        // @TODO: Remove hardcoded number
+        $formId = $formId ?? 3;
 
         // Store the routed parameter to use later
         $this->formId = $formId;
+
         $this->asExtension('ListController')->index();
 
         // Export formId
@@ -54,12 +56,10 @@ class Logs extends Controller
     public function export($formId)
     {
         $this->vars['formId'] = $formId;
-        parent::export();
-    }
 
-    private function getFirstFormId()
-    {
-        return Form::orderBy('name')->first()->id ?? abort(404);
+        $this->exportColumns = (new ExportHelper($formId))->getExportableColumns();
+
+        parent::export();
     }
 
     public function listExtendColumns($list): void

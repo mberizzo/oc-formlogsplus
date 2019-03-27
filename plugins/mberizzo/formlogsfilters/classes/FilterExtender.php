@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Arr;
 use Mberizzo\FormLogsFilters\Traits\FormSettings;
-use Renatio\FormBuilder\Models\Field;
 
 class FilterExtender
 {

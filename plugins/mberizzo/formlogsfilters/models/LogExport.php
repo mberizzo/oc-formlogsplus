@@ -1,43 +1,36 @@
 <?php namespace Mberizzo\Formlogsfilters\Models;
 
-use Illuminate\Support\Facades\DB;
-use Mberizzo\FormLogsFilters\Models\Log;
+use Illuminate\Support\Arr;
+use Mberizzo\FormLogsFilters\Classes\ExportHelper;
 
 class LogExport extends \Backend\Models\ExportModel
 {
 
-    public function exportData($columns, $sessionKey = null)
+    protected $helper;
+
+    public function __construct()
     {
-        foreach ($columns as $col) {
-            $select[] = $this->prepareColumnToSelect($col);
-        }
+        $this->helper = new ExportHelper(request()->form_id);
 
-        $logs = Log::select($select)
-            ->where('form_id', request()->form_id)
-            ->get();
-
-        return $logs->toArray();
+        parent::__construct();
     }
 
-    /**
-     * Detect if column is JSON and then
-     * Prepare a deep query selection
-     *
-     * @param string $col
-     * @return string $col
-     */
-    private function prepareColumnToSelect($col)
+    public function exportData($columns, $sessionKey = null)
     {
-        // JSON field has dot notations
-        $fieldParts = explode('.', $col);
-
-        // Detect if is JSON type
-        if (count($fieldParts) > 1) {
-            $field = array_shift($fieldParts);
-            $fieldDeep = implode('.', $fieldParts);
-            $col = DB::raw($field . '->>"$.' . $fieldDeep . '" as "' . $col . '"');
+        foreach ($columns as $column) {
+            $select[] = $this->helper->getQuerySelect4JsonData($column);
         }
 
-        return $col;
+        $log = $this->helper->logQuery();
+
+        return $log->select($select)->get()->toArray();
+    }
+
+    protected function exportExtendColumns($columns)
+    {
+        return Arr::only(
+            $this->helper->getExportableColumns(),
+            array_keys($columns)
+        );
     }
 }
