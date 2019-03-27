@@ -10,6 +10,7 @@ class FilterExtender
 
     protected $filter;
     protected $formId;
+    protected $scopes;
     protected $codes = [
         'text' => 'text',
         'radio_list' => 'group',
@@ -19,11 +20,12 @@ class FilterExtender
     {
         $this->filter = $filter;
         $this->formId = $filter->getController()->formId;
+        $this->scopes = $this->scopes();
     }
 
     public function addScopes()
     {
-        foreach ($this->scopes() as $fieldName) {
+        foreach ($this->scopes as $fieldName) {
             $this->filter->addScopes(
                 $this->makeScope($this->fields()[$fieldName])
             );

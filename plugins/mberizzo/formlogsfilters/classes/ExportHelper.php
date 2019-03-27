@@ -10,15 +10,17 @@ class ExportHelper
     use FormSettings;
 
     protected $formId;
+    protected $fields;
 
     public function __construct($formId)
     {
         $this->formId = $formId;
+        $this->fields = $this->fields();
     }
 
     public function getExportableColumns()
     {
-        $this->fields()->each(function ($field) use (&$data) {
+        $this->fields->each(function ($field) use (&$data) {
             if ($this->isNonExportable($field)) {
                 return;
             }
@@ -44,7 +46,9 @@ class ExportHelper
 
     private function isNonExportable($field)
     {
-        if (in_array($field->name, ['submit', 'g-recaptcha-response'])) {
+        $type = $field->field_type->code;
+
+        if (in_array($type, ['submit', 'recaptcha'])) {
             return true;
         }
 

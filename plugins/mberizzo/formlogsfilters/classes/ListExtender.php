@@ -9,16 +9,20 @@ class ListExtender
 
     protected $list;
     protected $formId;
+    protected $columns;
+    protected $fields;
 
     public function __construct($list)
     {
         $this->list = $list;
         $this->formId = $list->getController()->formId;
+        $this->columns = $this->columns();
+        $this->fields = $this->fields();
     }
 
     public function addColumns()
     {
-        foreach ($this->columns() as $fieldName) {
+        foreach ($this->columns as $fieldName) {
             $this->list->addColumns(
                 $this->makeColumn($this->fields()[$fieldName])
             );

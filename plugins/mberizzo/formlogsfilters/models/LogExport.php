@@ -26,11 +26,11 @@ class LogExport extends \Backend\Models\ExportModel
         return $log->select($select)->get()->toArray();
     }
 
-    protected function exportExtendColumns($columns)
+    protected function exportExtendColumns($selectedColumnsByUser)
     {
-        return Arr::only(
+        return array_intersect_key(
             $this->helper->getExportableColumns(),
-            array_keys($columns)
+            $selectedColumnsByUser
         );
     }
 }
