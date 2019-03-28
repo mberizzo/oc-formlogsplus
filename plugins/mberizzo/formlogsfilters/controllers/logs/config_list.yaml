@@ -12,8 +12,7 @@ modelClass: Mberizzo\FormLogsFilters\Models\Log
 title: Manage Logs
 
 # Link URL for each record
-# recordUrl: renatio/formbuilder/formlogs/preview/:id
-recordUrl: mberizzo/formlogsfilters/logs/preview/:id
+recordUrl: mberizzo/formlogsfilters/logs/show/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

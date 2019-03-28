@@ -49,9 +49,11 @@ class Logs extends Controller
         BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters', $formId);
     }
 
-    public function preview($logId)
+    public function show($logId)
     {
         $log = FormLog::find($logId);
+
+        $this->pageTitle = $log->form->name;
 
         $this->vars['log'] = $log;
 

@@ -1,15 +1,18 @@
 <?php Block::put('breadcrumb') ?>
     <ul>
-        <li><a href="<?= Backend::url('mberizzo/formlogsfilters/logs') ?>">Logs</a></li>
+        <li><a href="<?= Backend::url("mberizzo/formlogsfilters/logs/index/{$log->form_id}") ?>">Logs</a></li>
         <li><?= e($this->pageTitle) ?></li>
     </ul>
 <?php Block::endPut() ?>
 
 <?php if (!$this->fatalError): ?>
 
-    <div class="form-preview">
-        <?= $this->makePartial('content_html', ['log' => $log]) ?>
-    </div>
+    <iframe
+        srcdoc='<?= $log->content_html ?>'
+        width="100%"
+        frameborder="0"
+        onload="this.style.height=(this.contentDocument.body.scrollHeight)+'px';" scrolling="no">
+    </iframe>
 
 <?php else: ?>
 
