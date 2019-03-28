@@ -5,6 +5,7 @@ use Backend\Classes\Controller;
 use Mberizzo\FormLogsFilters\Classes\ExportHelper;
 use Mberizzo\FormLogsFilters\Classes\FilterExtender;
 use Mberizzo\FormLogsFilters\Classes\ListExtender;
+use Renatio\FormBuilder\Models\FormLog;
 
 /**
  * Logs Back-end Controller
@@ -46,6 +47,16 @@ class Logs extends Controller
 
         // Sidebar set active menu
         BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters', $formId);
+    }
+
+    public function preview($logId)
+    {
+        $log = FormLog::find($logId);
+
+        $this->vars['log'] = $log;
+
+        // Sidebar set active menu
+        BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters', $log->form_id);
     }
 
     public function listExtendQuery($query)

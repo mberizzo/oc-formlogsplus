@@ -70,12 +70,10 @@ class Plugin extends PluginBase
      */
     public function registerPermissions()
     {
-        return []; // Remove this line to activate
-
         return [
-            'mberizzo.formlogsfilters.some_permission' => [
-                'tab' => 'FormLogsFilters',
-                'label' => 'Some permission'
+            'mberizzo.formlogsplus.access_logs' => [
+                'tab' => 'Form Logs Plus',
+                'label' => 'Messages'
             ],
         ];
     }
