@@ -5,7 +5,6 @@ use Backend\Classes\Controller;
 use Mberizzo\FormLogsFilters\Classes\ExportHelper;
 use Mberizzo\FormLogsFilters\Classes\FilterExtender;
 use Mberizzo\FormLogsFilters\Classes\ListExtender;
-use System\Classes\SettingsManager;
 
 /**
  * Logs Back-end Controller
@@ -30,7 +29,6 @@ class Logs extends Controller
         parent::__construct();
 
         BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters');
-        SettingsManager::setContext('Mberizzo.FormLogsFilters', 'settings');
     }
 
     public function index($formId = null)
@@ -45,6 +43,9 @@ class Logs extends Controller
 
         // Export formId
         $this->vars['formId'] = $formId;
+
+        // Sidebar set active menu
+        BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters', $formId);
     }
 
     public function listExtendQuery($query)
