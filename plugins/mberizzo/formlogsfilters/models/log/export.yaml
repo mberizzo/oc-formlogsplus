@@ -1,0 +1,11 @@
+fields:
+    date_from:
+        label: From
+        type: datepicker
+        mode: date
+        span: left
+    date_to:
+        label: To
+        type: datepicker
+        mode: date
+        span: left

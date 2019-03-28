@@ -8,6 +8,11 @@ class LogExport extends \Backend\Models\ExportModel
 
     protected $helper;
 
+    /**
+     * @var array Fillable fields
+     */
+    protected $fillable = ['date_from', 'date_to'];
+
     public function __construct()
     {
         $this->helper = new ExportHelper(request()->form_id);
@@ -21,7 +26,7 @@ class LogExport extends \Backend\Models\ExportModel
             $select[] = $this->helper->getQuerySelect4JsonData($column);
         }
 
-        $log = $this->helper->logQuery();
+        $log = $this->helper->logQuery($this);
 
         return $log->select($select)->get()->toArray();
     }

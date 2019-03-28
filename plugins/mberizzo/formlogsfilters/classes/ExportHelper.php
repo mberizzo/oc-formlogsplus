@@ -55,9 +55,25 @@ class ExportHelper
         return false;
     }
 
-    public function logQuery()
+    public function logQuery($data)
     {
-        return Log::where('form_id', $this->formId);
+        $query = Log::where('form_id', $this->formId);
+
+        $query = $this->addDateScopeToLogQuery($query, $data);
+
+        return $query;
+    }
+
+    private function addDateScopeToLogQuery($query, $data)
+    {
+        if ($data->date_from && $data->date_to) {
+            return $query->whereBetween('created_at', [
+                $data->date_from,
+                $data->date_to
+            ]);
+        }
+
+        return $query;
     }
 
     /**
