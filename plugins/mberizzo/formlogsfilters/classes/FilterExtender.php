@@ -14,6 +14,8 @@ class FilterExtender
     protected $codes = [
         'text' => 'text',
         'radio_list' => 'group',
+        'checkbox' => 'checkbox',
+        'date' => 'date',
     ];
 
     public function __construct($filter)
