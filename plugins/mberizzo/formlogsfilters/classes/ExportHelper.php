@@ -30,7 +30,22 @@ class ExportHelper
             $data[$name] = $label;
         });
 
+        $data = $this->addIdAndCreatedAtColumns($data);
+
         return $data;
+    }
+
+    private function addIdAndCreatedAtColumns($data)
+    {
+        // Add id column at the begin
+        $columns['id'] = 'ID';
+
+        $columns = array_merge($columns, $data);
+
+        // Add created_at column at the end
+        $columns['created_at'] = 'Created At';
+
+        return $columns;
     }
 
     private function makeColumn($field)

@@ -32,11 +32,8 @@ class Logs extends Controller
         BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters');
     }
 
-    public function index($formId = null)
+    public function index($formId)
     {
-        // @TODO: Remove hardcoded number
-        $formId = $formId ?? 3;
-
         // Store the routed parameter to use later
         $this->formId = $formId;
 

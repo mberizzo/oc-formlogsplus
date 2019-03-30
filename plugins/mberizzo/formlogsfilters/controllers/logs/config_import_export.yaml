@@ -3,5 +3,5 @@ export:
     modelClass: Mberizzo\FormLogsFilters\Models\LogExport
     list: $/mberizzo/formlogsfilters/models/log/columns.yaml
     fileName: export.csv
-    redirect: mberizzo/formlogsfilters/logs/index # @TODO: Redirect to the correct message list
+    redirect: mberizzo/formlogsfilters/forms
     form: $/mberizzo/formlogsfilters/models/log/export.yaml

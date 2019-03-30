@@ -89,17 +89,18 @@ class Plugin extends PluginBase
     {
         $menu = $this->getMainMenuNavigation();
 
-        // @TODO: move this as Setting attribute
+        // @TODO: move this as Setting attribute or scope form RenatioForm model
+        // This code is also in plugins/mberizzo/formlogsfilters/controllers/Forms.php
         $formsIds = filter_var_array(
             array_keys(Settings::instance()->value),
             FILTER_SANITIZE_NUMBER_INT
         );
 
         // Build sidebar navigation
-        RenatioForm::withCount('logs')->findMany($formsIds)->each(function ($form, $index) use (&$menu) {
+        RenatioForm::findMany($formsIds)->each(function ($form, $index) use (&$menu) {
             $menu['formlogsfilters']['sideMenu'][$form->id] = [
-                'label' => "{$form->name} ({$form->logs_count})",
-                'icon' => Settings::get("form_id_$form->id")['icon'] ?? 'oc-icon-envelope',
+                'label' => $form->name,
+                'icon' => Settings::get("form_id_$form->id")['icon'],
                 'url' => Backend::url("mberizzo/formlogsfilters/logs/index/{$form->id}"),
             ];
         });
@@ -112,7 +113,7 @@ class Plugin extends PluginBase
         return [
             'formlogsfilters' => [
                 'label'       => 'Messages',
-                'url'         => Backend::url('mberizzo/formlogsfilters/logs'),
+                'url'         => Backend::url('mberizzo/formlogsfilters/forms'),
                 'icon'        => 'icon-envelope',
                 'permissions' => ['mberizzo.formlogsfilters.*'],
                 'order'       => 500,

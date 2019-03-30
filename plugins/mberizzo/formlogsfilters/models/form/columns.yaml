@@ -1,0 +1,12 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: Form
+        searchable: true
+    logs_count:
+        label: Logs Count
+        relation: logs
+        useRelationCount: true
