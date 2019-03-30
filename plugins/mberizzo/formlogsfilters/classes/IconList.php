@@ -14,9 +14,6 @@ class IconList
     public static function getList()
     {
         return [
-            'oc-icon-envelope' => ['envelope', 'oc-icon-envelope'],
-            'oc-icon-envelope-o' => ['envelope-o', 'oc-icon-envelope-o'],
-            'oc-icon-envelope-square' => ['envelope-square', 'oc-icon-envelope-square'],
             'oc-icon-adjust' => ['adjust', 'oc-icon-adjust'],
             'oc-icon-adn' => ['adn', 'oc-icon-adn'],
             'oc-icon-align-center' => ['align-center', 'oc-icon-align-center'],
@@ -189,6 +186,9 @@ class IconList
             'oc-icon-ellipsis-h' => ['ellipsis-h', 'oc-icon-ellipsis-h'],
             'oc-icon-ellipsis-v' => ['ellipsis-v', 'oc-icon-ellipsis-v'],
             'oc-icon-empire' => ['empire', 'oc-icon-empire'],
+            'oc-icon-envelope' => ['envelope', 'oc-icon-envelope'],
+            'oc-icon-envelope-o' => ['envelope-o', 'oc-icon-envelope-o'],
+            'oc-icon-envelope-square' => ['envelope-square', 'oc-icon-envelope-square'],
             'oc-icon-eraser' => ['eraser', 'oc-icon-eraser'],
             'oc-icon-eur' => ['eur', 'oc-icon-eur'],
             'oc-icon-euro' => ['euro', 'oc-icon-euro'],
