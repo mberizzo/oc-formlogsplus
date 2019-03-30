@@ -2,8 +2,9 @@
 
 namespace Mberizzo\FormLogsFilters\Models;
 
-use Renatio\FormBuilder\Models\Form as RenatioForm;
+use Mberizzo\FormLogsFilters\Classes\IconList;
 use October\Rain\Database\Model;
+use Renatio\FormBuilder\Models\Form as RenatioForm;
 
 /**
  * Class Settings
@@ -63,6 +64,11 @@ class Settings extends Model
                         'tab' => $formItem->name,
                         'form' => [
                             'fields' => [
+                                'icon' => [
+                                    'type' => 'dropdown',
+                                    'label' => 'Icon',
+                                    'comment' => 'The icon will be shown on sidebar menu.'
+                                ],
                                 'columns' => [
                                     'label' => 'Columns',
                                     'type' => 'checkboxlist',
@@ -90,17 +96,24 @@ class Settings extends Model
 
     private function cleanFieldsWithoutOptions($options)
     {
-        $value = [];
+        $settings = [];
 
-        foreach ($options as $formKey => $fields) {
-            foreach ($fields as $fieldName => $fieldValue) {
-                if (! empty($options[$formKey][$fieldName])) {
-                    $value[$formKey][$fieldName] = $fieldValue;
+        foreach ($options as $formKey => $setting) {
+            if ($setting['columns'] || $setting['scopes']) {
+                foreach ($setting as $name => $value) {
+                    if (! empty($options[$formKey][$name])) {
+                        $settings[$formKey][$name] = $value;
+                    }
                 }
             }
         }
 
-        ksort($value); // by key ASC
-        return $value;
+        ksort($settings); // by key ASC
+        return $settings;
+    }
+
+    public function getIconOptions()
+    {
+        return (new IconList)->getList();
     }
 }

@@ -42,7 +42,9 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-
+        RenatioForm::extend(function($model) {
+            $model->hasMany['logs'] = FormLog::class;
+        });
     }
 
     public function registerListColumnTypes()
@@ -94,11 +96,11 @@ class Plugin extends PluginBase
         );
 
         // Build sidebar navigation
-        RenatioForm::findMany($formsIds)->each(function ($item, $key) use (&$menu) {
-            $menu['formlogsfilters']['sideMenu'][$item->id] = [
-                'label' => $item->name,
-                'icon' => 'icon-envelope',
-                'url' => Backend::url("mberizzo/formlogsfilters/logs/index/{$item->id}"),
+        RenatioForm::withCount('logs')->findMany($formsIds)->each(function ($form, $index) use (&$menu) {
+            $menu['formlogsfilters']['sideMenu'][$form->id] = [
+                'label' => "{$form->name} ({$form->logs_count})",
+                'icon' => Settings::get("form_id_$form->id")['icon'] ?? 'oc-icon-envelope',
+                'url' => Backend::url("mberizzo/formlogsfilters/logs/index/{$form->id}"),
             ];
         });
 
