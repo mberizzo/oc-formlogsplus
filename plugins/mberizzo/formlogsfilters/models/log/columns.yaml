@@ -5,28 +5,4 @@
 columns:
     id:
         label: ID
-        invisible: true
-    # form_data.field_nombre.value:
-    #     label: Nombre
-    #     type: mberizzo.json
-    #     sortable: false
-    # form_data.field_apellido.value:
-    #     label: Apellido
-    #     type: mberizzo.json
-    #     sortable: false
-    # form_data.field_email.value:
-    #     label: Email
-    #     type: mberizzo.json
-    #     sortable: false
-    # form_data.field_telefono.value:
-    #     label: Telefono
-    #     type: mberizzo.json
-    #     sortable: false
-    #     invisible: true
-    # form_data.field_sexo.value:
-    #     label: Sexo
-    #     type: mberizzo.json
-    #     sortable: false
-    # created_at:
-    #     label: Fecha
-    #     type: date
+        invisible: false
