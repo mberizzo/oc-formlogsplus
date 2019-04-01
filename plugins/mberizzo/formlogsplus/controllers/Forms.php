@@ -1,8 +1,8 @@
-<?php namespace Mberizzo\FormLogsFilters\Controllers;
+<?php namespace Mberizzo\FormLogsPlus\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use Mberizzo\FormLogsFilters\Models\Settings;
+use Mberizzo\FormLogsPlus\Models\Settings;
 use October\Rain\Support\Facades\Flash;
 
 /**
@@ -20,7 +20,7 @@ class Forms extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters', 'forms');
+        BackendMenu::setContext('Mberizzo.FormLogsPlus', 'formlogsplus', 'forms');
     }
 
     public function index()

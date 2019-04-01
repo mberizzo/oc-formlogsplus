@@ -1,14 +1,14 @@
 <?php
 
-namespace Mberizzo\FormLogsFilters\Models;
+namespace Mberizzo\FormLogsPlus\Models;
 
-use Mberizzo\FormLogsFilters\Classes\IconList;
+use Mberizzo\FormLogsPlus\Classes\IconList;
 use October\Rain\Database\Model;
 use Renatio\FormBuilder\Models\Form as RenatioForm;
 
 /**
  * Class Settings
- * @package Mberizzo\FormLogsFilters\Models
+ * @package Mberizzo\FormLogsPlus\Models
  */
 class Settings extends Model
 {
@@ -36,7 +36,7 @@ class Settings extends Model
             'description' => 'Description',
             'category' => 'renatio.formbuilder::lang.settings.category',
             'icon' => 'icon-envelope',
-            'class' => 'Mberizzo\FormLogsFilters\Models\Settings',
+            'class' => 'Mberizzo\FormLogsPlus\Models\Settings',
             'order' => 600,
             'keywords' => 'form builder contact messages',
             // 'permissions' => ['mberizzo.company.access_company'],

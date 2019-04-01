@@ -1,7 +1,7 @@
-<?php namespace Mberizzo\FormLogsFilters\Classes;
+<?php namespace Mberizzo\FormLogsPlus\Classes;
 
 use Illuminate\Support\Arr;
-use Mberizzo\FormLogsFilters\Traits\FormSettings;
+use Mberizzo\FormLogsPlus\Traits\FormSettings;
 
 class FilterBuilder
 {

@@ -1,6 +1,6 @@
-<?php namespace Mberizzo\FormLogsFilters\Classes;
+<?php namespace Mberizzo\FormLogsPlus\Classes;
 
-use Mberizzo\FormLogsFilters\Traits\FormSettings;
+use Mberizzo\FormLogsPlus\Traits\FormSettings;
 
 class ListBuilder
 {

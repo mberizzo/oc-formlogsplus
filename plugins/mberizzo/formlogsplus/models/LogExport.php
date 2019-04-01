@@ -1,7 +1,7 @@
-<?php namespace Mberizzo\Formlogsfilters\Models;
+<?php namespace Mberizzo\FormLogsPlus\Models;
 
 use Illuminate\Support\Arr;
-use Mberizzo\FormLogsFilters\Classes\ExportManager;
+use Mberizzo\FormLogsPlus\Classes\ExportManager;
 
 class LogExport extends \Backend\Models\ExportModel
 {

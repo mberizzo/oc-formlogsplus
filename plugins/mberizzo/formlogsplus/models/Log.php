@@ -1,4 +1,4 @@
-<?php namespace Mberizzo\FormLogsFilters\Models;
+<?php namespace Mberizzo\FormLogsPlus\Models;
 
 use Model;
 

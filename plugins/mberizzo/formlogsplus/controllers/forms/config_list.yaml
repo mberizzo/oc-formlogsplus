@@ -3,7 +3,7 @@
 # ===================================
 
 # Model List Column configuration
-list: $/mberizzo/formlogsfilters/models/form/columns.yaml
+list: $/mberizzo/formlogsplus/models/form/columns.yaml
 
 # Model Class name
 modelClass: Renatio\FormBuilder\Models\Form
@@ -12,7 +12,7 @@ modelClass: Renatio\FormBuilder\Models\Form
 title: Manage Forms
 
 # Link URL for each record
-recordUrl: mberizzo/formlogsfilters/logs/index/:id
+recordUrl: mberizzo/formlogsplus/logs/index/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

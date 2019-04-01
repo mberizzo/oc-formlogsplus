@@ -1,8 +1,8 @@
-<?php namespace Mberizzo\FormLogsFilters\Classes;
+<?php namespace Mberizzo\FormLogsPlus\Classes;
 
 use Illuminate\Support\Facades\DB;
-use Mberizzo\FormLogsFilters\Models\Log;
-use Mberizzo\FormLogsFilters\Traits\FormSettings;
+use Mberizzo\FormLogsPlus\Models\Log;
+use Mberizzo\FormLogsPlus\Traits\FormSettings;
 
 class ExportManager
 {

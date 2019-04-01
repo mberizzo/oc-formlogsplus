@@ -1,16 +1,16 @@
-<?php namespace Mberizzo\FormLogsFilters;
+<?php namespace Mberizzo\FormLogsPlus;
 
 use Backend;
 use Illuminate\Support\Facades\Event;
-use Mberizzo\FormLogsFilters\Controllers\Logs;
-use Mberizzo\FormLogsFilters\Models\Log;
-use Mberizzo\FormLogsFilters\Models\Settings;
+use Mberizzo\FormLogsPlus\Controllers\Logs;
+use Mberizzo\FormLogsPlus\Models\Log;
+use Mberizzo\FormLogsPlus\Models\Settings;
 use Renatio\FormBuilder\Models\Form as RenatioForm;
 use Renatio\FormBuilder\Models\FormLog;
 use System\Classes\PluginBase;
 
 /**
- * FormLogsFilters Plugin Information File
+ * FormLogsPlus Plugin Information File
  */
 class Plugin extends PluginBase
 {
@@ -28,7 +28,7 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'FormLogsFilters',
+            'name'        => 'FormLogsPlus',
             'description' => 'No description provided yet...',
             'author'      => 'Mberizzo',
             'icon'        => 'icon-leaf'
@@ -90,7 +90,7 @@ class Plugin extends PluginBase
         $menu = $this->getMainMenuNavigation();
 
         // @TODO: move this as Setting attribute or scope form RenatioForm model
-        // This code is also in plugins/mberizzo/formlogsfilters/controllers/Forms.php
+        // This code is also in plugins/mberizzo/formlogsplus/controllers/Forms.php
         $formsIds = filter_var_array(
             array_keys(Settings::instance()->value),
             FILTER_SANITIZE_NUMBER_INT
@@ -98,10 +98,10 @@ class Plugin extends PluginBase
 
         // Build sidebar navigation
         RenatioForm::findMany($formsIds)->each(function ($form, $index) use (&$menu) {
-            $menu['formlogsfilters']['sideMenu'][$form->id] = [
+            $menu['formlogsplus']['sideMenu'][$form->id] = [
                 'label' => $form->name,
                 'icon' => Settings::get("form_id_$form->id")['icon'],
-                'url' => Backend::url("mberizzo/formlogsfilters/logs/index/{$form->id}"),
+                'url' => Backend::url("mberizzo/formlogsplus/logs/index/{$form->id}"),
             ];
         });
 
@@ -111,11 +111,11 @@ class Plugin extends PluginBase
     private function getMainMenuNavigation()
     {
         return [
-            'formlogsfilters' => [
+            'formlogsplus' => [
                 'label'       => 'Messages',
-                'url'         => Backend::url('mberizzo/formlogsfilters/forms'),
+                'url'         => Backend::url('mberizzo/formlogsplus/forms'),
                 'icon'        => 'icon-envelope',
-                'permissions' => ['mberizzo.formlogsfilters.*'],
+                'permissions' => ['mberizzo.formlogsplus.*'],
                 'order'       => 500,
             ],
         ];

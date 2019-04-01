@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Log
+
+# Model Form Field configuration
+form: $/mberizzo/formlogsplus/models/log/fields.yaml
+
+# Model Class name
+modelClass: Mberizzo\FormLogsplus\Models\Log
+
+# Default redirect location
+defaultRedirect: mberizzo/formlogsplus/logs
+
+# Create page
+create:
+    title: Create Log
+    redirect: mberizzo/formlogsplus/logs/update/:id
+    redirectClose: mberizzo/formlogsplus/logs
+
+# Update page
+update:
+    title: Edit Log
+    redirect: mberizzo/formlogsplus/logs
+    redirectClose: mberizzo/formlogsplus/logs
+
+# Preview page
+preview:
+    title: Preview Log

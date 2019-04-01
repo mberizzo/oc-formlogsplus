@@ -1,4 +1,4 @@
-<?php namespace Mberizzo\FormLogsFilters\Classes;
+<?php namespace Mberizzo\FormLogsPlus\Classes;
 
 /**
  * Contains a list of icons that can be used by plugins.

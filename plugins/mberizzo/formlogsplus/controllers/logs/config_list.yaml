@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/mberizzo/formlogsfilters/models/log/columns.yaml
+list: $/mberizzo/formlogsplus/models/log/columns.yaml
 
 # Model Class name
-modelClass: Mberizzo\FormLogsFilters\Models\Log
+modelClass: Mberizzo\FormLogsPlus\Models\Log
 
 # List Title
 title: Manage Logs
 
 # Link URL for each record
-recordUrl: mberizzo/formlogsfilters/logs/show/:id
+recordUrl: mberizzo/formlogsplus/logs/show/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

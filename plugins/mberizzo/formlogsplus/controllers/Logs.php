@@ -1,10 +1,10 @@
-<?php namespace Mberizzo\FormLogsFilters\Controllers;
+<?php namespace Mberizzo\FormLogsPlus\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use Mberizzo\FormLogsFilters\Classes\ExportManager;
-use Mberizzo\FormLogsFilters\Classes\FilterBuilder;
-use Mberizzo\FormLogsFilters\Classes\ListBuilder;
+use Mberizzo\FormLogsPlus\Classes\ExportManager;
+use Mberizzo\FormLogsPlus\Classes\FilterBuilder;
+use Mberizzo\FormLogsPlus\Classes\ListBuilder;
 use Renatio\FormBuilder\Models\FormLog;
 
 /**
@@ -29,7 +29,7 @@ class Logs extends Controller
     {
         parent::__construct();
 
-        BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters');
+        BackendMenu::setContext('Mberizzo.FormLogsPlus', 'formlogsplus');
     }
 
     public function index($formId)
@@ -43,7 +43,7 @@ class Logs extends Controller
         $this->vars['formId'] = $formId;
 
         // Sidebar set active menu
-        BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters', $formId);
+        BackendMenu::setContext('Mberizzo.FormLogsPlus', 'formlogsplus', $formId);
     }
 
     public function show($logId)
@@ -55,7 +55,7 @@ class Logs extends Controller
         $this->vars['log'] = $log;
 
         // Sidebar set active menu
-        BackendMenu::setContext('Mberizzo.FormLogsFilters', 'formlogsfilters', $log->form_id);
+        BackendMenu::setContext('Mberizzo.FormLogsPlus', 'formlogsplus', $log->form_id);
     }
 
     public function listExtendQuery($query)

@@ -1,6 +1,6 @@
-<?php namespace Mberizzo\FormLogsFilters\Traits;
+<?php namespace Mberizzo\FormLogsPlus\Traits;
 
-use Mberizzo\FormLogsFilters\Models\Settings;
+use Mberizzo\FormLogsPlus\Models\Settings;
 use Renatio\FormBuilder\Models\Field;
 
 trait FormSettings {
