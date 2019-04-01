@@ -32,14 +32,14 @@ class Settings extends Model
 
     public static $config = [
         'settings' => [
-            'label' => 'Logs Plus',
-            'description' => 'Description',
+            'label' => 'mberizzo.formlogsplus::lang.settings.label',
+            'description' => 'mberizzo.formlogsplus::lang.settings.description',
             'category' => 'renatio.formbuilder::lang.settings.category',
             'icon' => 'icon-envelope',
             'class' => 'Mberizzo\FormLogsPlus\Models\Settings',
             'order' => 600,
             'keywords' => 'form builder contact messages',
-            // 'permissions' => ['mberizzo.company.access_company'],
+            'permissions' => ['mberizzo.formlogsplus.*'],
         ],
     ];
 
@@ -65,18 +65,18 @@ class Settings extends Model
                         'form' => [
                             'fields' => [
                                 'icon' => [
+                                    'label' => 'mberizzo.formlogsplus::lang.form.labels.icon',
                                     'type' => 'dropdown',
-                                    'label' => 'Icon',
-                                    'comment' => 'The icon will be shown on sidebar menu.'
+                                    'comment' => 'mberizzo.formlogsplus::lang.form.comments.icon'
                                 ],
                                 'columns' => [
-                                    'label' => 'Columns',
+                                    'label' => 'mberizzo.formlogsplus::lang.form.labels.columns',
                                     'type' => 'checkboxlist',
                                     'span' => 'auto',
                                     'options' => $fields,
                                 ],
                                 'scopes' => [
-                                    'label' => 'Scopes',
+                                    'label' => 'mberizzo.formlogsplus::lang.form.labels.scopes',
                                     'type' => 'checkboxlist',
                                     'span' => 'auto',
                                     'options' => $fields,

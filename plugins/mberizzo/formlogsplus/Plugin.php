@@ -28,10 +28,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'FormLogsPlus',
-            'description' => 'No description provided yet...',
+            'name'        => 'mberizzo.formlogsplus::lang.plugin.name',
+            'description' => 'mberizzo.formlogsplus::lang.plugin.description',
             'author'      => 'Mberizzo',
-            'icon'        => 'icon-leaf'
+            'icon'        => 'icon-envelope'
         ];
     }
 
@@ -74,8 +74,8 @@ class Plugin extends PluginBase
     {
         return [
             'mberizzo.formlogsplus.access_logs' => [
-                'tab' => 'Form Logs Plus',
-                'label' => 'Messages'
+                'tab' => 'mberizzo.formlogsplus::lang.permissions.tab',
+                'label' => 'mberizzo.formlogsplus::lang.permissions.access_logs',
             ],
         ];
     }
@@ -112,7 +112,7 @@ class Plugin extends PluginBase
     {
         return [
             'formlogsplus' => [
-                'label'       => 'Messages',
+                'label'       => 'mberizzo.formlogsplus::lang.navigation.label',
                 'url'         => Backend::url('mberizzo/formlogsplus/forms'),
                 'icon'        => 'icon-envelope',
                 'permissions' => ['mberizzo.formlogsplus.*'],
