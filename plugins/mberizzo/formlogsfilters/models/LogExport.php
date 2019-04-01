@@ -1,7 +1,7 @@
 <?php namespace Mberizzo\Formlogsfilters\Models;
 
 use Illuminate\Support\Arr;
-use Mberizzo\FormLogsFilters\Classes\ExportHelper;
+use Mberizzo\FormLogsFilters\Classes\ExportManager;
 
 class LogExport extends \Backend\Models\ExportModel
 {
@@ -15,7 +15,7 @@ class LogExport extends \Backend\Models\ExportModel
 
     public function __construct()
     {
-        $this->helper = new ExportHelper(request()->form_id);
+        $this->helper = new ExportManager(request()->form_id);
 
         parent::__construct();
     }

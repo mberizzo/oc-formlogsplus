@@ -3,7 +3,7 @@
 use Illuminate\Support\Arr;
 use Mberizzo\FormLogsFilters\Traits\FormSettings;
 
-class FilterExtender
+class FilterBuilder
 {
 
     use FormSettings;

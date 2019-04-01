@@ -2,9 +2,9 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use Mberizzo\FormLogsFilters\Classes\ExportHelper;
-use Mberizzo\FormLogsFilters\Classes\FilterExtender;
-use Mberizzo\FormLogsFilters\Classes\ListExtender;
+use Mberizzo\FormLogsFilters\Classes\ExportManager;
+use Mberizzo\FormLogsFilters\Classes\FilterBuilder;
+use Mberizzo\FormLogsFilters\Classes\ListBuilder;
 use Renatio\FormBuilder\Models\FormLog;
 
 /**
@@ -68,18 +68,18 @@ class Logs extends Controller
     {
         $this->vars['formId'] = $formId;
 
-        $this->exportColumns = (new ExportHelper($formId))->getExportableColumns();
+        $this->exportColumns = (new ExportManager($formId))->getExportableColumns();
 
         parent::export();
     }
 
     public function listExtendColumns($list): void
     {
-        (new ListExtender($list))->addColumns();
+        (new ListBuilder($list))->addColumns();
     }
 
     public function listFilterExtendScopes($filter): void
     {
-        (new FilterExtender($filter))->addScopes();
+        (new FilterBuilder($filter))->addScopes();
     }
 }

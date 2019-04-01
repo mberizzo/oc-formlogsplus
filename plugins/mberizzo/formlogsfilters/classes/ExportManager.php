@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\DB;
 use Mberizzo\FormLogsFilters\Models\Log;
 use Mberizzo\FormLogsFilters\Traits\FormSettings;
 
-class ExportHelper
+class ExportManager
 {
 
     use FormSettings;

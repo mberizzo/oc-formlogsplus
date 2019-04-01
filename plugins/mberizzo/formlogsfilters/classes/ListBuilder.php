@@ -2,7 +2,7 @@
 
 use Mberizzo\FormLogsFilters\Traits\FormSettings;
 
-class ListExtender
+class ListBuilder
 {
 
     use FormSettings;
