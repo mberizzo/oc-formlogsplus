@@ -81,7 +81,7 @@ class FilterBuilder
     {
         $this->filter->addScopes([
             'created_at' => [
-                'label' => 'Date',
+                'label' => 'mberizzo.formlogsplus::lang.form.labels.created_at',
                 'type' => "daterange",
                 'conditions' => "created_at >= ':after' AND created_at <= ':before'",
             ],

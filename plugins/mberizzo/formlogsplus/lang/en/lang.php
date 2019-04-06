@@ -18,9 +18,10 @@ return [
     ],
     'form' => [
         'labels' => [
-            'icon'    => 'Icon',
-            'columns' => 'Columns',
-            'scopes'  => 'Filters',
+            'icon'       => 'Icon',
+            'columns'    => 'Columns',
+            'scopes'     => 'Filters',
+            'created_at' => 'Created',
         ],
         'comments' => [
             'icon' => 'The icon will be shown on sidebar menu.',

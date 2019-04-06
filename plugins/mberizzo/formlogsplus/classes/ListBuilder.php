@@ -47,7 +47,7 @@ class ListBuilder
     {
         $this->list->addColumns([
             "created_at" => [
-                'label' => 'Date',
+                'label' => 'mberizzo.formlogsplus::lang.form.labels.created_at',
                 'type' => 'date',
                 'sortable' => true,
             ],

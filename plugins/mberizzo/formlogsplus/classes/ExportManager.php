@@ -43,7 +43,7 @@ class ExportManager
         $columns = array_merge($columns, $data);
 
         // Add created_at column at the end
-        $columns['created_at'] = 'Created At';
+        $columns['created_at'] = 'mberizzo.formlogsplus::lang.form.labels.created_at';
 
         return $columns;
     }
