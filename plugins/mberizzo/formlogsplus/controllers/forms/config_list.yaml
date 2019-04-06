@@ -9,7 +9,7 @@ list: $/mberizzo/formlogsplus/models/form/columns.yaml
 modelClass: Renatio\FormBuilder\Models\Form
 
 # List Title
-title: Manage Forms
+title: mberizzo.formlogsplus::lang.titles.forms_list
 
 # Link URL for each record
 recordUrl: mberizzo/formlogsplus/logs/index/:id

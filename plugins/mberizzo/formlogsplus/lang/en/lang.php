@@ -27,4 +27,15 @@ return [
             'icon' => 'The icon will be shown on sidebar menu.',
         ],
     ],
+    'buttons' => [
+        'export' => 'Export',
+    ],
+    'titles' => [
+        'export'     => 'Export',
+        'logs_list'  => 'Messages List',
+        'forms_list' => 'Forms List',
+    ],
+    'messages' => [
+        'config_not_found' => 'There are no configurations',
+    ],
 ];

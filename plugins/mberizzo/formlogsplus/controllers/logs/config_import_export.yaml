@@ -1,5 +1,5 @@
 export:
-    title: Exportar
+    title: mberizzo.formlogsplus::lang.titles.export
     modelClass: Mberizzo\FormLogsPlus\Models\LogExport
     list: $/mberizzo/formlogsplus/models/log/columns.yaml
     fileName: export.csv

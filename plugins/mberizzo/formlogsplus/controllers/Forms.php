@@ -39,7 +39,7 @@ class Forms extends Controller
 
         // @TODO: hack to show empty list
         if (! $formsIds) {
-            Flash::info('There are no configurations');
+            Flash::info(e(trans('mberizzo.formlogsplus::lang.messages.config_not_found')));
             $query->where('id', '<', 0);
         }
 

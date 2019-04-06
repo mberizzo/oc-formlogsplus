@@ -9,7 +9,7 @@ list: $/mberizzo/formlogsplus/models/log/columns.yaml
 modelClass: Mberizzo\FormLogsPlus\Models\Log
 
 # List Title
-title: Manage Logs
+title: mberizzo.formlogsplus::lang.titles.logs_list
 
 # Link URL for each record
 recordUrl: mberizzo/formlogsplus/logs/show/:id
