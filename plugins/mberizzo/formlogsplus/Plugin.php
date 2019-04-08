@@ -51,16 +51,9 @@ class Plugin extends PluginBase
     {
         return [
             'mberizzo.json' => function($value, $column, $record) {
-                $attributes = explode('.', $column->columnName);
-                $field = array_shift($attributes);
-                $data = json_decode($record->{$field});
-                $value = $data->{$attributes[0]};
-
-                for ($i = 1; $i < count($attributes); $i++) {
-                    $value = $value->{$attributes[$i]};
-                }
-
-                return $value;
+                $column = explode('.', $column->columnName)[1];
+                $data = json_decode($record->form_data);
+                return $data->{$column}->value ?? '';
             }
         ];
     }
