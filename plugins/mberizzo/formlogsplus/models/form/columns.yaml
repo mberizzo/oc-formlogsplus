@@ -4,9 +4,9 @@
 
 columns:
     name:
-        label: Form
+        label: mberizzo.formlogsplus::lang.form.labels.forms
         searchable: true
     logs_count:
-        label: Logs Count
+        label: mberizzo.formlogsplus::lang.form.labels.logs_count
         relation: logs
         useRelationCount: true

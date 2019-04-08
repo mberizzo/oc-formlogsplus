@@ -6,7 +6,7 @@ return [
         'description' => 'Add list, filters and export features to Form Builder plugin.'
     ],
     'settings' => [
-        'label'       => 'Plus',
+        'label'       => 'Form Plus',
         'description' => 'List and filters configurations',
     ],
     'permissions' => [
@@ -22,6 +22,10 @@ return [
             'columns'    => 'Columns',
             'scopes'     => 'Filters',
             'created_at' => 'Created',
+            'from'       => 'From',
+            'to'         => 'To',
+            'forms'      => 'Forms',
+            'logs_count' => 'Logs Count',
         ],
         'comments' => [
             'icon' => 'The icon will be shown on sidebar menu.',

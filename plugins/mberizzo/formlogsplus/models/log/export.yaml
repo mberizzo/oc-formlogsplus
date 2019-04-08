@@ -1,11 +1,11 @@
 fields:
     date_from:
-        label: From
+        label: mberizzo.formlogsplus::lang.form.labels.from
         type: datepicker
         mode: date
         span: left
     date_to:
-        label: To
+        label: mberizzo.formlogsplus::lang.form.labels.to
         type: datepicker
         mode: date
         span: left
