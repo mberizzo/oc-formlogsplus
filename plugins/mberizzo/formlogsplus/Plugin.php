@@ -2,6 +2,7 @@
 
 use Backend;
 use Illuminate\Support\Facades\Event;
+use Mberizzo\FormLogsPlus\Classes\SettingsManager;
 use Mberizzo\FormLogsPlus\Controllers\Logs;
 use Mberizzo\FormLogsPlus\Models\Log;
 use Mberizzo\FormLogsPlus\Models\Settings;
@@ -44,6 +45,14 @@ class Plugin extends PluginBase
     {
         RenatioForm::extend(function($model) {
             $model->hasMany['logs'] = FormLog::class;
+        });
+
+        Event::listen('backend.form.extendFields', function ($form) {
+            if (! $form->model instanceof Settings) {
+                return;
+            }
+
+            (new SettingsManager)->register($form);
         });
     }
 
@@ -116,14 +125,17 @@ class Plugin extends PluginBase
 
     public function registerSettings()
     {
-        Event::listen('backend.form.extendFields', function ($form) {
-            if (! $form->model instanceof Settings) {
-                return;
-            }
-
-            Settings::buildFieldsDotYaml($form);
-        });
-
-        return Settings::$config;
+        return [
+            'settings' => [
+                'label' => 'mberizzo.formlogsplus::lang.settings.label',
+                'description' => 'mberizzo.formlogsplus::lang.settings.description',
+                'category' => 'renatio.formbuilder::lang.settings.category',
+                'icon' => 'icon-envelope',
+                'class' => 'Mberizzo\FormLogsPlus\Models\Settings',
+                'order' => 600,
+                'keywords' => 'form builder contact messages',
+                'permissions' => ['mberizzo.formlogsplus.*'],
+            ],
+        ];
     }
 }
