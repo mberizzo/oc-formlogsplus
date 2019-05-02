@@ -11,6 +11,38 @@
 
 <?php if (!$this->fatalError): ?>
 
+    <?php if ($log->files->count() > 0): ?>
+        <div class="control-list">
+            <table class="table data" data-control="rowlink">
+                <thead>
+                    <tr>
+                        <th style="width: 150px"><span>Action</span></th>
+                        <th><a href="javascript:;">Name</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($log->files as $file): ?>
+                        <tr>
+                            <td class="column-button nolink">
+                                <a
+                                    href="<?= $file->getPath() ?>"
+                                    target="_blank"
+                                    class="btn btn-secondary btn-sm">
+                                    Open
+                                </a>
+                            </td>
+                            <td>
+                                <a href="javascript:;">
+                                    <?= $file->getFileName() ?>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif ?>
+
     <iframe
         srcdoc='<?= $log->content_html ?>'
         width="100%"
