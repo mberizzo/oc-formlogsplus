@@ -94,7 +94,7 @@ class Plugin extends PluginBase
         // @TODO: move this as Setting attribute or scope form RenatioForm model
         // This code is also in plugins/mberizzo/formlogsplus/controllers/Forms.php
         $formsIds = filter_var_array(
-            array_keys(Settings::instance()->value),
+            array_keys(Settings::instance()->value ?? []),
             FILTER_SANITIZE_NUMBER_INT
         );
 

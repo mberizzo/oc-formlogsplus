@@ -33,7 +33,7 @@ class Forms extends Controller
         // @TODO: change this code, is a hack to show empty list
         // when there are not configurations
         $formsIds = filter_var_array(
-            array_keys(Settings::instance()->value),
+            array_keys(Settings::instance()->value ?? []),
             FILTER_SANITIZE_NUMBER_INT
         );
 
