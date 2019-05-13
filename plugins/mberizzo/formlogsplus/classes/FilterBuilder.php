@@ -41,7 +41,7 @@ class FilterBuilder
         return [
             "form_data.{$field->name}.value" => [
                 'label' => $field->label,
-                'type' => $this->codes[$field->field_type->code],
+                'type' => $this->codes[$field->field_type->code] ?? 'text',
                 'conditions' => $this->getConditions($field),
                 'options' => $this->getOptions($field),
             ],
