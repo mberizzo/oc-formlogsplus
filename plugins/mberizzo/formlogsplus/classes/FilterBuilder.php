@@ -55,6 +55,10 @@ class FilterBuilder
                 $cond  = "JSON_EXTRACT(form_data, '$.{$field->name}.value') ";
                 $cond .= "in (:filtered)";
                 break;
+            case 'checkbox':
+                $cond  = "JSON_EXTRACT(form_data, '$.{$field->name}.value') ";
+                $cond .= "<> '0'";
+                break;
             default:
                 $cond  = 'LOWER(JSON_EXTRACT(form_data, "$.' . $field->name . '.value")) ';
                 $cond .= 'LIKE LOWER("%":value"%")';
