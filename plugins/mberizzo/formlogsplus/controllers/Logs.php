@@ -52,6 +52,10 @@ class Logs extends Controller
 
         $this->vars['log'] = $log;
 
+        $this->vars['formData'] = collect($log->form_data)->filter(function($value, $key) {
+            return !in_array($key, ['submit', 'g-recaptcha-response', 'files']);
+        });
+
         // Sidebar set active menu
         BackendMenu::setContext('Mberizzo.FormLogsPlus', 'formlogsplus', $log->form_id);
     }

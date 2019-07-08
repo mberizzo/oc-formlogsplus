@@ -43,12 +43,40 @@
         </div>
     <?php endif ?>
 
-    <iframe
-        srcdoc='<?= $log->content_html ?>'
-        width="100%"
-        frameborder="0"
-        onload="this.style.height=(this.contentDocument.body.scrollHeight)+'px';" scrolling="no">
-    </iframe>
+    <?php if ($log->content_html): ?>
+        <div class="checkbox custom-checkbox">
+            <input name="checkbox" value="1" type="checkbox" id="triggerChk1" />
+            <label for="triggerChk1">Show clean data</label>
+        </div>
+    <?php endif ?>
+
+    <form
+        <?php if ($log->content_html): ?>
+            data-trigger-action="show"
+            data-trigger="#triggerChk1"
+            data-trigger-condition="checked"
+        <?php endif; ?>
+        class="form-elements <?php if ($log->content_html): ?> hide <?php endif; ?>">
+        <?php $x = 0; ?>
+        <?php foreach ($formData as $key => $value): ?>
+            <?php if ($value['value']): ?>
+                <div class="form-group span-<?= ($x % 2 == 0) ? 'left' : 'right' ?>">
+                    <label><?= $value['label']; ?></label>
+                    <input type="text" value="<?= $value['value']; ?>" class="form-control" disabled="disabled" />
+                </div>
+                <?php $x++; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </form>
+
+    <?php if ($log->content_html): ?>
+        <iframe
+            srcdoc='<?= $log->content_html ?>'
+            width="100%"
+            frameborder="0"
+            onload="this.style.height=(this.contentDocument.body.scrollHeight)+'px';" scrolling="no">
+        </iframe>
+    <?php endif; ?>
 
 <?php else: ?>
 
