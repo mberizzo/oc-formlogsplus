@@ -1,5 +1,6 @@
 <?php namespace Mberizzo\FormLogsPlus\Models;
 
+use Facades\Mberizzo\FormLogsPlus\Classes\Misc;
 use Illuminate\Support\Arr;
 use Mberizzo\FormLogsPlus\Classes\ExportManager;
 
@@ -22,11 +23,15 @@ class LogExport extends \Backend\Models\ExportModel
 
     public function exportData($columns, $sessionKey = null)
     {
+        $log = $this->helper->logQuery($this);
+
+        if (Misc::mysqlVersion() < 5.7) {
+            return Misc::helpMeToExport($columns, $log->get());
+        }
+
         foreach ($columns as $column) {
             $select[] = $this->helper->getQuerySelect4JsonData($column);
         }
-
-        $log = $this->helper->logQuery($this);
 
         return $log->select($select)->get()->toArray();
     }
